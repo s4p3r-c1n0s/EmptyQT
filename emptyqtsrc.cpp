@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QSpacerItem>
+#include <QComboBox>
+#include <QRect>
+#include <QDesktopWidget>
+#include <QStyledItemDelegate>
 
 int main(int argc, char **argv)
 {
@@ -36,10 +40,38 @@ int main(int argc, char **argv)
     //slider->setGeometry(40, 10, 30, 300);
 
     QSpacerItem *spacer =  new QSpacerItem(430, 19, QSizePolicy::Minimum,  QSizePolicy::Minimum);
+    QDesktopWidget *w = QApplication::desktop();
+    QRect rec = w->availableGeometry();
 
-    layout->addWidget(progressBar, 0, Qt::AlignBottom);
+    QComboBox *comboBox = new QComboBox;
+        comboBox->addItem("5 km per hour");
+        comboBox->addItem("10 km per hour");
+        comboBox->addItem("20 km per hour");
+        comboBox->addItem("30 km per hour");
+        comboBox->addItem("40 km per hour");
+        comboBox->addItem("45 km per hour");
+        comboBox->addItem("50 km per hour");
+        comboBox->addItem("55 km per hour");
+        comboBox->addItem("60 km per hour");
+        comboBox->addItem("70 km per hour");
+        comboBox->addItem("80 km per hour");
+        comboBox->addItem("90 km per hour");
+        comboBox->addItem("100 km per hour");
+        comboBox->addItem("110 km per hour");
+
+        QStyledItemDelegate* itemDelegate = new QStyledItemDelegate();
+        comboBox->setItemDelegate(itemDelegate);
+
+        //comboBox->
+        comboBox->setInsertPolicy(QComboBox::InsertAlphabetically);
+        comboBox->setShortcutEnabled(QComboBox::AdjustToMinimumContentsLength);
+        comboBox->setStyleSheet("QComboBox {min-height: 30px;background : darkblue; color: yellow;min-width: 20em;alignment: right;text-align: right;}\
+                                    QAbstractItemView::item {color: yellow;  background : darkblue;\min-height: 30px;alignment: right;text-align: right;}");
+
+    layout->addWidget(progressBar, 0, Qt::AlignTop);
     //layout->addSpacing(1000);
-    layout->addWidget(slider,0, Qt::AlignRight);
+    layout->addWidget(slider);
+    layout->addWidget(comboBox,0, Qt::AlignRight | Qt::AlignBottom);
     window.setLayout(layout);
 
     window.setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
