@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QProgressBar>
 #include <QSlider>
+#include <QMainWindow>
 
 int main(int argc, char **argv)
 {
@@ -8,17 +9,18 @@ int main(int argc, char **argv)
 
     // Create a container window
     QWidget window;
-    window.setFixedSize(100 , 400);
+    //window.setFixedSize(100 , 400);
 
     // Create a progress bar
     // with the range between 0 and 100, and a starting value of 0
     QProgressBar *progressBar = new QProgressBar(&window);
     progressBar->setRange(0, 100);
-    progressBar->setValue(0);
+    progressBar->setValue(20);
     progressBar->setTextDirection(QProgressBar::TopToBottom);
     progressBar->setOrientation(Qt::Vertical);
     progressBar->setGeometry(10, 10, 30, 300);
     progressBar->setFormat("%p%");
+    //progressBar->colorCount();
     progressBar->setInvertedAppearance(true);
 
     // Create a horizontal slider
@@ -26,11 +28,17 @@ int main(int argc, char **argv)
     QSlider *slider = new QSlider(&window);
     slider->setOrientation(Qt::Vertical);
     slider->setRange(0, 100);
-    slider->setValue(0);
+    slider->setValue(20);
+    //slider->colorCount();
     slider->setGeometry(40, 10, 30, 300);
 
-    window.show();
+    window.setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
+    window.setParent(0); // Create TopLevel-Widget
+    window.setAttribute(Qt::WA_NoSystemBackground, true);
+    window.setAttribute(Qt::WA_TranslucentBackground, true);
+    //window.setAttribute(Qt::WA_PaintOnScreen);
 
+    window.showFullScreen();
     // Connection
     // This connection set the value of the progress bar
     // while the slider's value changes
