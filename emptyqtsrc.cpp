@@ -2,6 +2,8 @@
 #include <QProgressBar>
 #include <QSlider>
 #include <QMainWindow>
+#include <QHBoxLayout>
+#include <QSpacerItem>
 
 int main(int argc, char **argv)
 {
@@ -11,9 +13,10 @@ int main(int argc, char **argv)
     QWidget window;
     //window.setFixedSize(100 , 400);
 
+    QHBoxLayout *layout = new QHBoxLayout;
     // Create a progress bar
     // with the range between 0 and 100, and a starting value of 0
-    QProgressBar *progressBar = new QProgressBar(&window);
+    QProgressBar *progressBar = new QProgressBar();
     progressBar->setRange(0, 100);
     progressBar->setValue(20);
     progressBar->setTextDirection(QProgressBar::TopToBottom);
@@ -25,12 +28,19 @@ int main(int argc, char **argv)
 
     // Create a horizontal slider
     // with the range between 0 and 100, and a starting value of 0
-    QSlider *slider = new QSlider(&window);
+    QSlider *slider = new QSlider();
     slider->setOrientation(Qt::Vertical);
     slider->setRange(0, 100);
     slider->setValue(20);
     //slider->colorCount();
-    slider->setGeometry(40, 10, 30, 300);
+    //slider->setGeometry(40, 10, 30, 300);
+
+    QSpacerItem *spacer =  new QSpacerItem(430, 19, QSizePolicy::Minimum,  QSizePolicy::Minimum);
+
+    layout->addWidget(progressBar, 0, Qt::AlignBottom);
+    //layout->addSpacing(1000);
+    layout->addWidget(slider,0, Qt::AlignRight);
+    window.setLayout(layout);
 
     window.setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
     window.setParent(0); // Create TopLevel-Widget
