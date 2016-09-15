@@ -1,4 +1,5 @@
 #include "window.h"
+#include <QPushButton>
 
 Window::Window(QWidget *parent) : QWidget(parent)
 {
