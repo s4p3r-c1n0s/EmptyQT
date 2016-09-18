@@ -7,7 +7,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
     emptyqtsrc.cpp \
-    window.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    window.h
+    mainwindow.h
+FORMS    += mainwindow.ui
