@@ -1,13 +1,5 @@
+#include "mainwindow.h"
 #include <QApplication>
-#include <QProgressBar>
-#include <QSlider>
-#include <QMainWindow>
-#include <QHBoxLayout>
-#include <QSpacerItem>
-#include <QComboBox>
-#include <QRect>
-#include <QDesktopWidget>
-#include <QStyledItemDelegate>
 
 int main(int argc, char **argv)
 {
