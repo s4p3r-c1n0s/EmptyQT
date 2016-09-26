@@ -1,16 +1,18 @@
+#ifndef CMAINWINDOW_H
+#define CMAINWINDOW_H
 
 #include <QMainWindow>
 
 class QPushButton;
 class StackedDialog;
 
-class MainWindow : public QMainWindow
+class CMainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    CMainWindow(QWidget *parent = 0);
+    ~CMainWindow();
 
 protected slots:
     void showThumbnilView();
@@ -23,3 +25,4 @@ private:
     StackedDialog* m_pStackedDlg;
 };
 
+#endif // MAINWINDOW_H

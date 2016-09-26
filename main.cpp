@@ -1,18 +1,26 @@
 #include "cmainwindow.h"
-#include "mainwindow.h"
+#include <QStyledItemDelegate>
 #include <QApplication>
-
+#include <QComboBox>
+#include <QHBoxLayout>
+#include <QProgressBar>
+#include <QSlider>
+#include <QSpacerItem>
+#include <QRect>
+#include <QDesktopWidget>
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w = new MainWindow();
-    w.show();
     // Create a container window
+    MainWindow galleryImageView;
+    galleryImageView.show();
+//w/show();
     QComboBox *comboBox = new QComboBox;
     //QWidget window(comboBox);
     QWidget window;
-    window.setFixedSize(1280,720);
+    //window.setFixedSize(1280,720);
     CMainWindow *new_window = new CMainWindow(comboBox);
   //  new_window->combo_local = comboBox;
     QHBoxLayout *layout = new QHBoxLayout;
@@ -66,16 +74,16 @@ int main(int argc, char *argv[])
                                     QAbstractItemView::item {color: yellow;  background : darkblue;\min-height: 30px;alignment: right;text-align: right;}");
 
 
-    layout->addWidget(progressBar, 0, Qt::AlignTop);
+    //layout->addWidget(progressBar, 0, Qt::AlignTop);
     //layout->addSpacing(1000);
-    layout->addWidget(slider);
-    layout->addWidget(comboBox,0, Qt::AlignRight | Qt::AlignBottom);
+   // layout->addWidget(slider);
+    layout->addWidget(comboBox,0, Qt::AlignLeft | Qt::AlignTop);
     window.setLayout(layout);
     window.setStyleSheet("background-color:rgba(0,0,0,0%);");
-   // window.setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
-   // window.setParent(0); // Create TopLevel-Widget
-   /// window.setAttribute(Qt::WA_NoSystemBackground, true);
-   // window.setAttribute(Qt::WA_TranslucentBackground, true);
+    window.setWindowFlags(Qt::ToolTip);
+    //window.setParent(0); // Create TopLevel-Widget
+    //window.setAttribute(Qt::WA_NoSystemBackground, true);
+    //window.setAttribute(Qt::WA_TranslucentBackground, true);
     //window.setAttribute(Qt::WA_PaintOnScreen);
     window.show();
     // Connection

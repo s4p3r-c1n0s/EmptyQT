@@ -1,25 +1,21 @@
-#include "mainwindow.h"
+#include "cmainwindow.h"
 #include "stackeddialog.h"
 
 #include <QPushButton>
 #include <QDebug>
 
-MainWindow::MainWindow(QWidget *parent)
+CMainWindow::CMainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_pBtnLibImg( NULL ),
       m_pStackedDlg( NULL )
 {
     init();
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
-    this->setParent(0); // Create TopLevel-Widget
-    this->setAttribute(Qt::WA_NoSystemBackground, true);
-    this->setAttribute(Qt::WA_TranslucentBackground, true);
-//    this->setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
    // setWindowTitle("ISRS DEMO");
     setGeometry(1250,300,128,128);
 }
 
-MainWindow::~MainWindow()
+CMainWindow::~CMainWindow()
 {
     if( m_pBtnLibImg )
     {
@@ -27,12 +23,12 @@ MainWindow::~MainWindow()
     }
 }
 
-void MainWindow::init()
+void CMainWindow::init()
 {
     if(!m_pBtnLibImg)
     {
        m_pBtnLibImg = new QPushButton(this);
-       QPixmap open_library_button("/home/varun/Pictures/image_library.png");
+       QPixmap open_library_button("/home/umangjeet/Pictures/image_library.png");
        QIcon library_button_icon(open_library_button);
        m_pBtnLibImg->setIcon(library_button_icon);
        m_pBtnLibImg->setStyleSheet("background-color: rgba(79,141,176,100);");
@@ -48,16 +44,14 @@ void MainWindow::init()
     connect(m_pBtnLibImg, SIGNAL(clicked()), this, SLOT(showThumbnilView()));
 }
 
-void MainWindow::showThumbnilView()
+void CMainWindow::showThumbnilView()
 {
     qDebug()<<"I am in showThumbnilView()";
     if( m_pStackedDlg != NULL )
     {
-        //m_pStackedDlg->setGeometry(1050,428,200,200);
-        m_pStackedDlg->setWindowFlags(Qt::Window| Qt::WindowStaysOnTopHint);
-        m_pStackedDlg->showFullScreen();
-	m_pStackedDlg->activateWindow();
-	m_pStackedDlg->raise();
+        m_pStackedDlg->setGeometry(1050,428,200,200);
+        m_pStackedDlg->show();
+       // m_pStackedDlg->setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
 
     }
 }
