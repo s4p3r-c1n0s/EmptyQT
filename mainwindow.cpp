@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "stackeddialog.h"
+#include "thumbnildialog.h"
 
 #include <QPushButton>
 #include <QDebug>
@@ -7,7 +8,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_pBtnLibImg( NULL ),
-      m_pStackedDlg( NULL )
+      m_pStackedDlg( NULL ),
+      m_pThumbNilDlg( NULL )
 {
     init();
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
@@ -15,8 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->setAttribute(Qt::WA_NoSystemBackground, true);
     this->setAttribute(Qt::WA_TranslucentBackground, true);
 //    this->setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
-   // setWindowTitle("ISRS DEMO");
-    setGeometry(1250,300,128,128);
+    this->setWindowTitle("ISRS DEMO");
+    this->setGeometry(1250,300,128,128);
 }
 
 MainWindow::~MainWindow()
@@ -31,6 +33,7 @@ void MainWindow::init()
 {
     if(!m_pBtnLibImg)
     {
+        m_pThumbNilDlg = new ThumbNilDialog;
        m_pBtnLibImg = new QPushButton(this);
        QPixmap open_library_button("/home/varun/Pictures/image_library.png");
        QIcon library_button_icon(open_library_button);
@@ -42,14 +45,21 @@ void MainWindow::init()
        setLayoutDirection(Qt::LayoutDirectionAuto);
     }
 
-    m_pStackedDlg = new StackedDialog;
-      m_pStackedDlg->setWindowModality(Qt::ApplicationModal);
-
+    connect(m_pBtnLibImg, SIGNAL(clicked()), m_pThumbNilDlg, SLOT(loadImages()));
     connect(m_pBtnLibImg, SIGNAL(clicked()), this, SLOT(showThumbnilView()));
+}
+
+void MainWindow::show(QWidget* threshold)
+{
+    m_thresholdComboBox = threshold;
+    QMainWindow::show();
+    connect(m_pBtnLibImg,SIGNAL(clicked()), m_thresholdComboBox,SLOT(hide()));
 }
 
 void MainWindow::showThumbnilView()
 {
+    m_pStackedDlg = new StackedDialog(m_pThumbNilDlg);
+      m_pStackedDlg->setWindowModality(Qt::ApplicationModal);
     qDebug()<<"I am in showThumbnilView()";
     if( m_pStackedDlg != NULL )
     {

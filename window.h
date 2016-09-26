@@ -1,15 +1,18 @@
-#ifndef WINDOW_H
-#define WINDOW_H
 
-#include <QWidget>
+#include <QObject>
 
-class QPushButton;
-class Window : public QWidget
+class Window : public QObject
 {
-public:
-    explicit Window(QWidget *parent = 0);
+ Q_OBJECT
+ public:
+  explicit Window(QObject *parent = 0)
+  { m_value = 1; }
+  int value() const { return m_value; }
+  void setValue(int value);
+ signals:
+  	 void valueChanged(int newValue);
  private:
- QPushButton *m_button;
+ 	 int m_value;
 };
 
-#endif // WINDOW_H
+

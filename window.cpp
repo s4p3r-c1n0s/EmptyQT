@@ -1,16 +1,9 @@
 #include "window.h"
-#include <QPushButton>
-#include <QApplication>
 
-Window::Window(QWidget *parent) : QWidget(parent)
+void Window::setValue(int value)
 {
-    // Set size of the window
-     setFixedSize(100, 50);
-
-     // Create and position the button
-     m_button = new QPushButton("Hello World", this);
-     m_button->setGeometry(10, 10, 80, 30);
-
-     // NEW : Do the connection
-     connect(m_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
+    if (value != m_value) {
+        m_value = value;
+        emit valueChanged(value);
+    }
 }

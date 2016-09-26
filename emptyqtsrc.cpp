@@ -1,17 +1,35 @@
-#include "mainwindow.h"
 #include <QApplication>
+#include <QProgressBar>
+#include <QSlider>
+#include <QMainWindow>
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QComboBox>
+#include <QRect>
+#include <QTimer>
+#include <QDesktopWidget>
+#include <QMainWindow>
+#include <QStyledItemDelegate>
+#include <iostream>
+#include "window.h"
+#include "mainwindow.h"
+#include "emptyqtsrc.h"
 
-int main(int argc, char **argv)
+Window *exitapp = new Window();
+
+void exit_wid(int value)
 {
-    QApplication app (argc, argv);
+	exitapp->setValue(value);
+}
+
+int Qt_main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
 
     // Create a container window
-    QComboBox *comboBox = new QComboBox;
-    //QWidget window(comboBox);
     QWidget window;
-    //window.setFixedSize(1280,720);
-    MainWindow *new_window = new MainWindow(comboBox);
-  //  new_window->combo_local = comboBox;
+    //window.setFixedSize(100 , 400);
+
     QHBoxLayout *layout = new QHBoxLayout;
     // Create a progress bar
     // with the range between 0 and 100, and a starting value of 0
@@ -37,21 +55,23 @@ int main(int argc, char **argv)
     QSpacerItem *spacer =  new QSpacerItem(430, 19, QSizePolicy::Minimum,  QSizePolicy::Minimum);
     QDesktopWidget *w = QApplication::desktop();
     QRect rec = w->availableGeometry();
+	std::cout<<rec.width()<<" "<<rec.height()<<std::endl;
 
-        comboBox->addItem("5 km per hour",QVariant(5));
-        comboBox->addItem("10 km per hour",QVariant(10));
-        comboBox->addItem("20 km per hour",QVariant(20));
-        comboBox->addItem("30 km per hour",QVariant(30));
-        comboBox->addItem("40 km per hour",QVariant(40));
-        comboBox->addItem("45 km per hour",QVariant(45));
-        comboBox->addItem("50 km per hour",QVariant(50));
-        comboBox->addItem("55 km per hour",QVariant(55));
-        comboBox->addItem("60 km per hour",QVariant(60));
-        comboBox->addItem("70 km per hour",QVariant(70));
-        comboBox->addItem("80 km per hour",QVariant(80));
-        comboBox->addItem("90 km per hour",QVariant(90));
-        comboBox->addItem("100 km per hour",QVariant(100));
-        comboBox->addItem("110 km per hour",QVariant(110));
+    QComboBox *comboBox = new QComboBox;
+        comboBox->addItem("5 km per hour");
+        comboBox->addItem("10 km per hour");
+        comboBox->addItem("20 km per hour");
+        comboBox->addItem("30 km per hour");
+        comboBox->addItem("40 km per hour");
+        comboBox->addItem("45 km per hour");
+        comboBox->addItem("50 km per hour");
+        comboBox->addItem("55 km per hour");
+        comboBox->addItem("60 km per hour");
+        comboBox->addItem("70 km per hour");
+        comboBox->addItem("80 km per hour");
+        comboBox->addItem("90 km per hour");
+        comboBox->addItem("100 km per hour");
+        comboBox->addItem("110 km per hour");
 
         QStyledItemDelegate* itemDelegate = new QStyledItemDelegate();
         comboBox->setItemDelegate(itemDelegate);
@@ -60,27 +80,32 @@ int main(int argc, char **argv)
         comboBox->setInsertPolicy(QComboBox::InsertAlphabetically);
         comboBox->setShortcutEnabled(QComboBox::AdjustToMinimumContentsLength);
         comboBox->setStyleSheet("QComboBox {min-height: 30px;background : darkblue; color: yellow;min-width: 20em;alignment: right;text-align: right;}\
-                                    QAbstractItemView::item {color: yellow;  background : darkblue;min-height: 30px;alignment: right;text-align: right;}");
+                                    QAbstractItemView::item {color: yellow;  background : darkblue;\min-height: 30px;alignment: right;text-align: right;}");
 
-    layout->addWidget(progressBar, 0, Qt::AlignTop);
+    //layout->addWidget(progressBar, 0, Qt::AlignTop);
     //layout->addSpacing(1000);
-    layout->addWidget(slider);
+    //layout->addWidget(slider);
     layout->addWidget(comboBox,0, Qt::AlignRight | Qt::AlignBottom);
     window.setLayout(layout);
-
-    window.setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
+    window.setStyleSheet("background-color:transparent;");
+    window.setWindowFlags(window.windowFlags() | Qt::ToolTip |Qt::FramelessWindowHint);
     window.setParent(0); // Create TopLevel-Widget
-    window.setAttribute(Qt::WA_NoSystemBackground, true);
+    //window.setAttribute(Qt::WA_NoSystemBackground, true);
     window.setAttribute(Qt::WA_TranslucentBackground, true);
-    //window.setAttribute(Qt::WA_PaintOnScreen);
-
-    window.showFullScreen();
+    window.setAttribute(Qt::WA_TransparentForMouseEvents, true);
+//	MainWindow w;
+//w.setWindowState(w.windowState() ^ Qt::WindowFullScreen);
+//window.setAttribute(Qt::WA_PaintOnScreen);
+    window.show();
     // Connection
     // This connection set the value of the progress bar
     // while the slider's value changes
     QObject::connect(slider, SIGNAL (valueChanged(int)), progressBar, SLOT (setValue(int)));
-    QObject::connect(comboBox,SIGNAL(activated(int)),new_window,SLOT(update_threshhold(int)));
 
+    QObject::connect(exitapp, SIGNAL(valueChanged(int)),  QApplication::instance(), SLOT(quit()));
+
+    MainWindow galleryImageView;
+    galleryImageView.show(&window);
 
     return app.exec();
 }

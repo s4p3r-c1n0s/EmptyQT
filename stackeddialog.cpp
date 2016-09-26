@@ -4,11 +4,12 @@
 
 #include <QDebug>
 
-StackedDialog::StackedDialog(QWidget *parent) :
+StackedDialog::StackedDialog(QWidget *parent, ThumbNilDialog *pThumbNilDlg) :
     QStackedWidget(parent),
     m_pThumbNilDlg( NULL ),
     m_pFullViewDlg( NULL )
 {
+    m_pThumbNilDlg = pThumbNilDlg;
     init();
 
 }

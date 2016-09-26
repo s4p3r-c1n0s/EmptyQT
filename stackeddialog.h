@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QLayout>
 #include <QString>
+#include "thumbnildialog.h"
+
 class ThumbNilDialog;
 class FullViewDlg;
 
@@ -12,7 +14,7 @@ class StackedDialog : public QStackedWidget
 {
     Q_OBJECT
 public:
-    explicit StackedDialog(QWidget *parent = 0);
+    explicit StackedDialog(QWidget *parent = 0, ThumbNilDialog* pThumbNilDlg = 0);
     ~StackedDialog();
 
 signals:

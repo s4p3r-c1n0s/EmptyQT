@@ -22,7 +22,7 @@ static const uint qt_meta_data_ThumbNilDialog[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -34,13 +34,14 @@ static const uint qt_meta_data_ThumbNilDialog[] = {
 
  // slots: signature, parameters, type, tag, flags
       41,   15,   15,   15, 0x0a,
+      56,   15,   15,   15, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_ThumbNilDialog[] = {
     "ThumbNilDialog\0\0signalShowImage(QString)\0"
-    "showFullView()\0"
+    "showFullView()\0loadImages()\0"
 };
 
 void ThumbNilDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -51,6 +52,7 @@ void ThumbNilDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         switch (_id) {
         case 0: _t->signalShowImage((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->showFullView(); break;
+        case 2: _t->loadImages(); break;
         default: ;
         }
     }
@@ -88,9 +90,9 @@ int ThumbNilDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

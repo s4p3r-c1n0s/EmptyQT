@@ -16,10 +16,10 @@ signals:
 
 public slots:
     void showFullView();
+    void loadImages();
 
 private:
     void init();
-    void loadImages();
 
     QMap<QToolButton*, QString> m_pMapFileName;
 };

@@ -32,6 +32,7 @@ void ThumbNilDialog::init()
 
 void ThumbNilDialog::loadImages()
 {
+    qDebug()<<"refreshing images";
     m_pMapFileName.clear();
     QDir libDir(globalStrImgPath);
     QFileInfoList fileList;
