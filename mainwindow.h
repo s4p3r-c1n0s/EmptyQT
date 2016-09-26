@@ -2,45 +2,27 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QProgressBar>
-#include <QSlider>
-#include <QMainWindow>
-#include <QHBoxLayout>
-#include <QSpacerItem>
-#include <QComboBox>
-#include <QRect>
-#include <QDesktopWidget>
-#include <QStyledItemDelegate>
-#include <QScreen>
-#include <QPushButton>
-#include <QDebug>
-#include <QFile>
-#include<QTextStream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
-namespace Ui {
-class MainWindow;
-}
+class QPushButton;
+class StackedDialog;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QComboBox *local, QWidget *parent = 0);
-    QComboBox *combo_local;
+    MainWindow(QWidget *parent = 0);
     ~MainWindow();
-public slots:
-    void update_threshhold(int index);
-private:
-    Ui::MainWindow *ui;
-    QPushButton *m_button;
 
+protected slots:
+    void showThumbnilView();
+
+private:
+    void init();
+    QPushButton*   m_pBtnLibImg;
+    QPushButton*   cancel_button;
+
+    StackedDialog* m_pStackedDlg;
 };
 
 #endif // MAINWINDOW_H

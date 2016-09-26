@@ -1,3 +1,4 @@
+#include "cmainwindow.h"
 #include "mainwindow.h"
 #include <QApplication>
 
@@ -5,12 +6,14 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    MainWindow w = new MainWindow();
+    w.show();
     // Create a container window
     QComboBox *comboBox = new QComboBox;
     //QWidget window(comboBox);
     QWidget window;
     window.setFixedSize(1280,720);
-    MainWindow *new_window = new MainWindow(comboBox);
+    CMainWindow *new_window = new CMainWindow(comboBox);
   //  new_window->combo_local = comboBox;
     QHBoxLayout *layout = new QHBoxLayout;
     // Create a progress bar

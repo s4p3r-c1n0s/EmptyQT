@@ -1,32 +1,57 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "stackeddialog.h"
 
-MainWindow::MainWindow(QComboBox *local,QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+#include <QPushButton>
+#include <QDebug>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+      m_pBtnLibImg( NULL ),
+      m_pStackedDlg( NULL )
 {
-    ui->setupUi(this);
-   combo_local = local;
-    // Create and position the button
-    m_button = new QPushButton("Hello World", this);
-    m_button->setGeometry(10, 10, 80, 30);
-    // NEW : Do the connection
-    connect(m_button, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()));
+    init();
+    this->setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
+   // setWindowTitle("ISRS DEMO");
+    setGeometry(1250,300,128,128);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    if( m_pBtnLibImg )
+    {
+        delete m_pBtnLibImg;
+    }
 }
-void MainWindow::update_threshhold(int index)
+
+void MainWindow::init()
 {
-    int threshhold;
-    int fd;
-  threshhold = combo_local->itemData(index).toInt();
-   qDebug() << "Threshhold Speed= " << threshhold;
-  mkfifo("MYPIPE",0666);
-  fd = open("MYPIPE",O_WRONLY);
-  write(fd,&threshhold,sizeof(int));
+    if(!m_pBtnLibImg)
+    {
+       m_pBtnLibImg = new QPushButton(this);
+       QPixmap open_library_button("/home/umangjeet/Pictures/image_library.png");
+       QIcon library_button_icon(open_library_button);
+       m_pBtnLibImg->setIcon(library_button_icon);
+       m_pBtnLibImg->setStyleSheet("background-color: rgba(79,141,176,100);");
+        m_pBtnLibImg-> setFixedSize(QSize(128,128));
+        m_pBtnLibImg->setIconSize(QSize(128,128));
+       layout()->addWidget(m_pBtnLibImg);
+       setLayoutDirection(Qt::LayoutDirectionAuto);
+    }
 
+    m_pStackedDlg = new StackedDialog;
+      m_pStackedDlg->setWindowModality(Qt::ApplicationModal);
+
+    connect(m_pBtnLibImg, SIGNAL(clicked()), this, SLOT(showThumbnilView()));
 }
 
+void MainWindow::showThumbnilView()
+{
+    qDebug()<<"I am in showThumbnilView()";
+    if( m_pStackedDlg != NULL )
+    {
+        m_pStackedDlg->setGeometry(1050,428,200,200);
+        m_pStackedDlg->show();
+       // m_pStackedDlg->setWindowFlags(Qt::Window|Qt::FramelessWindowHint);
+
+    }
+}
