@@ -1,6 +1,10 @@
 #include "stackeddialog.h"
 #include "thumbnildialog.h"
 #include "fullviewdlg.h"
+#include<QGraphicsScene>
+#include<QGraphicsView>
+#include<QBrush>
+#include<QVBoxLayout>
 
 #include <QDebug>
 
@@ -44,18 +48,24 @@ void StackedDialog::showFullView(QString filename)
 {
     qDebug()<<"Show full view in StackedDialog::showFullView  "<<filename;
 
-     m_pFullViewDlg->str = filename;
+   m_pFullViewDlg->str = filename;
 
-    if( m_pFullViewDlg /*&& m_pFullViewDlg->getViewer() */)
+    if( m_pFullViewDlg /*&& m_pFullViewDlg->getViewer()*/)
     {
         setCurrentWidget( m_pFullViewDlg );
-        //m_pFullViewDlg->sethh( filename );
-        QPixmap bkgnd(filename);
-        bkgnd = bkgnd.scaled(m_pFullViewDlg/*->getViewer()*/->size(), Qt::IgnoreAspectRatio);
-        QPalette palette;
-        //m_pFullViewDlg/*->getViewer()*/->setPalette(palette);
-        //setCurrentWidget( m_pFullViewDlg );
-        this->setPalette(palette);
+
+        qDebug()<<"view exists  "<<filename;
+
+        QGraphicsScene *scene = new QGraphicsScene();
+        scene->addPixmap(QPixmap(filename));
+        QGraphicsView *view = new QGraphicsView(scene);
+
+        view->setBackgroundBrush(QBrush(Qt::black));
+        QVBoxLayout* vlayout = new QVBoxLayout(m_pFullViewDlg);
+
+        vlayout->addWidget(view);
+        vlayout->addWidget(new QPushButton("some button here"));
+
     }
 }
 
