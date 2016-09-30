@@ -22,7 +22,7 @@ void exit_wid(int value)
 	exitapp->setValue(value);
 }
 
-int Qt_main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
 

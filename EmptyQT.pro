@@ -1,4 +1,4 @@
-TEMPLATE = lib
+TEMPLATE = app
 TARGET = EmptyQT
 CONFIG += staticlib
 
@@ -20,4 +20,5 @@ HEADERS  += mainwindow.h \
     thumbnildialog.h \
     stackeddialog.h \
     fullviewdlg.h \
-    window.h
+    window.h \
+    imageviewlistener.h

@@ -62,6 +62,10 @@ void StackedDialog::showFullView(QString filename)
         QGraphicsScene *scene = new QGraphicsScene();
         scene->addPixmap(image);
         QGraphicsView *view = new QGraphicsView(scene);
+        view->setMouseTracking(true);
+
+        QMouseEvent *pressEvent;
+        view->mousePressEvent(pressEvent);
 
         view->setBackgroundBrush(QBrush(Qt::black));
         QVBoxLayout* vlayout = new QVBoxLayout(m_pFullViewDlg);
