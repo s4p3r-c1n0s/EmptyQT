@@ -56,8 +56,11 @@ void StackedDialog::showFullView(QString filename)
 
         qDebug()<<"view exists  "<<filename;
 
+        QPixmap image(filename);
+        image = image.scaled(m_pFullViewDlg->size().width() * 0.99, m_pFullViewDlg->size().height()*0.95, Qt::IgnoreAspectRatio);
+
         QGraphicsScene *scene = new QGraphicsScene();
-        scene->addPixmap(QPixmap(filename));
+        scene->addPixmap(image);
         QGraphicsView *view = new QGraphicsView(scene);
 
         view->setBackgroundBrush(QBrush(Qt::black));
