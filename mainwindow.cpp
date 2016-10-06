@@ -4,6 +4,7 @@
 
 #include <QPushButton>
 #include <QDebug>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -35,7 +36,7 @@ void MainWindow::init()
     {
         m_pThumbNilDlg = new ThumbNilDialog;
        m_pBtnLibImg = new QPushButton(this);
-       QPixmap open_library_button("/home/varun/Pictures/image_library.png");
+       QPixmap open_library_button(QDir::homePath() + "/Pictures" + "/image_library.png");
        QIcon library_button_icon(open_library_button);
        m_pBtnLibImg->setIcon(library_button_icon);
        m_pBtnLibImg->setStyleSheet("background-color: rgba(79,141,176,100);");

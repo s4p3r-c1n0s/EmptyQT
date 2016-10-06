@@ -1,6 +1,7 @@
 #include "stackeddialog.h"
 #include "thumbnildialog.h"
 #include "fullviewdlg.h"
+#include "imageviewlistener.h"
 #include<QGraphicsScene>
 #include<QGraphicsView>
 #include<QBrush>
@@ -61,11 +62,13 @@ void StackedDialog::showFullView(QString filename)
 
         QGraphicsScene *scene = new QGraphicsScene();
         scene->addPixmap(image);
-        QGraphicsView *view = new QGraphicsView(scene);
-        view->setMouseTracking(true);
+        ImageViewListener *view = new ImageViewListener(scene);
 
-        QMouseEvent *pressEvent;
-        view->mousePressEvent(pressEvent);
+        //view->grabGesture(Qt::SwipeGesture);
+        //view->grabGesture(Qt::PanGesture);
+        //view->grabGesture(Qt::PinchGesture);
+        //view->setMouseTracking(true);
+        view->viewport()->setAttribute(Qt::WA_AcceptTouchEvents, true);
 
         view->setBackgroundBrush(QBrush(Qt::black));
         QVBoxLayout* vlayout = new QVBoxLayout(m_pFullViewDlg);

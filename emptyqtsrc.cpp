@@ -22,10 +22,24 @@ void exit_wid(int value)
 	exitapp->setValue(value);
 }
 
+int mw_ui_intf_getThresholdFlag(char *ThresholdFlag)
+{
+	// if updated value
+	//  then set the ThresholdFlag
+	return 1001;
+}
+
+int mw_ui_intf_getThresholdValue(unsigned char *SpeedThersholdVal)
+{
+
+	// fill the latest threshold value here
+
+	return 1001;
+}
+
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-
     // Create a container window
     QWidget window;
     //window.setFixedSize(100 , 400);
@@ -90,12 +104,12 @@ int main(int argc, char **argv)
     window.setStyleSheet("background-color:transparent;");
     window.setWindowFlags(window.windowFlags() | Qt::ToolTip |Qt::FramelessWindowHint);
     window.setParent(0); // Create TopLevel-Widget
-    //window.setAttribute(Qt::WA_NoSystemBackground, true);
+    window.setAttribute(Qt::WA_NoSystemBackground, true);
     window.setAttribute(Qt::WA_TranslucentBackground, true);
     window.setAttribute(Qt::WA_TransparentForMouseEvents, true);
 //	MainWindow w;
 //w.setWindowState(w.windowState() ^ Qt::WindowFullScreen);
-//window.setAttribute(Qt::WA_PaintOnScreen);
+window.setAttribute(Qt::WA_PaintOnScreen);
     window.show();
     // Connection
     // This connection set the value of the progress bar

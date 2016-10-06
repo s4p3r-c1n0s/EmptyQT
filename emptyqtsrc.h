@@ -16,6 +16,8 @@
 int Qt_main(int argc, char **argv);
 
 void exit_wid(int value);
+int mw_ui_intf_getThresholdFlag(char *ThresholdFlag);
+int mw_ui_intf_getThresholdValue(unsigned char *SpeedThersholdVal);
 
 #ifdef __cplusplus
     }

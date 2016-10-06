@@ -6,11 +6,11 @@
 #include <QHeaderView>
 #include <QMessageBox>
 #include <QToolButton>
+#include <QDir>
 
 #include <QDebug>
 
-const QString globalStrImgPath = "/home/varun/Pictures";
-
+const QString globalStrImgPath = QDir::homePath() + "/Pictures";
 #define ROWCNT 10
 #define COLCNT 10
 #define IMG_WIDTH 100

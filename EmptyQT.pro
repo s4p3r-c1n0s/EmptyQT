@@ -1,10 +1,9 @@
 TEMPLATE = app
 TARGET = EmptyQT
-CONFIG += staticlib
+#CONFIG += staticlib
 
 QT       += core gui printsupport
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += widgets
 
 SOURCES += \
     emptyqtsrc.cpp \
@@ -13,7 +12,8 @@ SOURCES += \
     thumbnildialog.cpp \
     stackeddialog.cpp \
     fullviewdlg.cpp \
-    window.cpp
+    window.cpp \
+    imageviewlistener.cpp
 
 HEADERS  += mainwindow.h \
         cmainwindow.h \

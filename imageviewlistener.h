@@ -2,44 +2,29 @@
 #define IMAGEVIEWLISTENER
 
 #include <QGraphicsView>
-#include <QMessageBox>
+#include <QEvent>
 #include <QFile>
 #include <QDebug>
 #include <QPrinter>
-#include <QPrintDialog>
-#include <QPainter>
+#include <QSwipeGesture>
+#include <QMouseEvent>
 #include <QImage>
 
 class QPushButton;
 
-class ImageViewListner : public QGraphicsView
+class ImageViewListener : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit FullViewDlg(QWidget *parent = 0);
+    explicit ImageViewListener(QGraphicsScene * scene, QWidget * parent = 0);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    bool event(QEvent *event);
+    bool viewportEvent(QEvent *event);
+    bool gestureEvent(QGestureEvent *event);
+    void swipeTriggered(QSwipeGesture *gesture);
 
-    QWidget* getViewer() const
-    {
-        return m_pFullView;
-    }
-    void sethh(QString);
-    QString  str;
-signals:
-    void signalGoToThumbnilView();
-
-//protected:
-  //  void resizeEvent(QResizeEvent * event);
-
-public slots:
-    void printImage();
-
-
-private:
-    void init();
-
-    QWidget* m_pFullView;
-    QPushButton* m_pPrintBtn;
-    QPushButton* m_pCancelBtn;
 };
 
 #endif // IMAGEVIEWLISTENER
